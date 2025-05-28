@@ -14,11 +14,7 @@ const client = new Client({
 const distube = new DisTube(client, {
   leaveOnEmpty: true,
   leaveOnFinish: true,
-  leaveOnStop: true,
-  emitNewSongOnly: true,
-  nsfw: true,
-  directLink: true,
-  ytdlOptions: { highWaterMark: 1 << 25 }
+  leaveOnStop: true
 });
 
 client.once("ready", () => {
@@ -37,7 +33,10 @@ client.on("messageCreate", async (message) => {
     const voiceChannel = message.member.voice.channel;
     if (!voiceChannel) return message.reply("🎧 Você precisa estar em um canal de voz!");
     if (!args[0]) return message.reply("🔗 Forneça um link ou nome da música.");
-    distube.play(voiceChannel, args.join(" "), { textChannel: message.channel, member: message.member });
+    distube.play(voiceChannel, args.join(" "), {
+      textChannel: message.channel,
+      member: message.member
+    });
   }
 
   if (command === "stop") {
