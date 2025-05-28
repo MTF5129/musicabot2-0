@@ -1,5 +1,8 @@
 const { Client, GatewayIntentBits } = require("discord.js");
 const { DisTube } = require("distube");
+const { SpotifyPlugin } = require("@distube/spotify");
+const { SoundCloudPlugin } = require("@distube/soundcloud");
+const { YtDlpPlugin } = require("@distube/yt-dlp");
 require("dotenv").config();
 
 const client = new Client({
@@ -12,9 +15,15 @@ const client = new Client({
 });
 
 const distube = new DisTube(client, {
+  emitNewSongOnly: true,
   leaveOnEmpty: true,
   leaveOnFinish: true,
-  leaveOnStop: true
+  leaveOnStop: true,
+  plugins: [
+    new SpotifyPlugin(),
+    new SoundCloudPlugin(),
+    new YtDlpPlugin()
+  ]
 });
 
 client.once("ready", () => {
@@ -31,8 +40,8 @@ client.on("messageCreate", async (message) => {
 
   if (command === "play") {
     const voiceChannel = message.member.voice.channel;
-    if (!voiceChannel) return message.reply("🎧 Você precisa estar em um canal de voz!");
-    if (!args[0]) return message.reply("🔗 Forneça um link ou nome da música.");
+    if (!voiceChannel) return message.reply("🎧 Entre em um canal de voz primeiro!");
+    if (!args[0]) return message.reply("🔗 Forneça o link ou nome da música.");
     distube.play(voiceChannel, args.join(" "), {
       textChannel: message.channel,
       member: message.member

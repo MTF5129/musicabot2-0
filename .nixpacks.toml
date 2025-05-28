@@ -4,8 +4,5 @@ nixPkgs = ["nodejs_18", "ffmpeg"]
 [phases.install]
 cmds = ["npm install --legacy-peer-deps"]
 
-[phases.build]
-cmds = ["echo 'build phase skipped'"]
-
 [start]
-cmd = "PATH=$PATH:/nix/var/nix/profiles/default/bin node index.js"
+cmd = "node index.js"
