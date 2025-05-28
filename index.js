@@ -1,6 +1,5 @@
 const { Client, GatewayIntentBits } = require("discord.js");
 const { DisTube } = require("distube");
-const { SpotifyPlugin } = require("@distube/spotify");
 const { SoundCloudPlugin } = require("@distube/soundcloud");
 const { YtDlpPlugin } = require("@distube/yt-dlp");
 require("dotenv").config();
@@ -19,7 +18,6 @@ const distube = new DisTube(client, {
   leaveOnFinish: true,
   leaveOnStop: true,
   plugins: [
-    new SpotifyPlugin(),
     new SoundCloudPlugin(),
     new YtDlpPlugin()
   ],
