@@ -15,14 +15,9 @@ const distube = new DisTube(client, {
   leaveOnEmpty: true,
   leaveOnFinish: true,
   leaveOnStop: true,
-  plugins: [],
   emitNewSongOnly: true,
   nsfw: true,
   directLink: true,
-  youtubeDL: false,
-  updateYouTubeDL: false,
-  emitAddListWhenCreatingQueue: false,
-  emitAddSongWhenCreatingQueue: false,
   ytdlOptions: { highWaterMark: 1 << 25 }
 });
 
